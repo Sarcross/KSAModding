@@ -34,6 +34,7 @@ Before exporting, orient your model according to KSA's coordinate system:
 - **-Z = Down** (radial parts attach here, bottom of vehicle)
 
 Examples:
+
 - Capsule: doors face up (+Z), nose forward (+X), base back (-X)
 - Engine: nozzle points back (-X), attachment point forward (+X)
 - Radial parts: attachment face down (-Z), outer face up (+Z)
