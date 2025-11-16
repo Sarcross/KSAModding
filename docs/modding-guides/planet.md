@@ -5,11 +5,9 @@ This guide explains how to add custom planets to the game.
 
 ## Requirements
 Requirements:
-
 - GIMP or any other image editing tool that can export .dds files in BC5 format
 
 ## File Locations
-
 - **Game Directory**: `C:\Users\[YourName]\AppData\Local\Programs\Kitten Space Agency\`
 - **Textures**: `Content/Core/Textures`
 - **Planet Definitions**: `Content/Core/Astronomicals.xml`
@@ -915,7 +913,7 @@ Pluto Template (for Small Terrestrail Bodies):
         <LongitudeOfAscendingNode Degrees="55" />
         <ArgumentOfPeriapsis Degrees="0" />
         <MeanAnomalyAtEpoch Degrees="0" />
-        <MeanRadius Km="6" />
+        <MeanRadius Km="600" />
         <Mass Kg="12166330000000000" />
         <Color R="0.941176" G="0.901961" B="0.54902" />
         <Diffuse Path="Textures/Pluto_Diffuse.dds" Category="Terrain"/>
@@ -926,3 +924,185 @@ Pluto Template (for Small Terrestrail Bodies):
         </Height>
     </TerrestrialBody>
 ```
+
+
+## Parts of the Planet Block
+
+### Types of Planets
+This defines what type of planet it is
+
+#### TerrestrialBody
+ - Example: ```<TerrestrialBody Id="Pluto" Parent="Sol">```
+ - TerrestrialBody: This defines the planet as not having an atmosphere
+ - Pluto: The ID/Name of the planet
+ - Sol: The body the planet orbits
+
+#### AtmosphericBody
+ - Example: ```<AtmosphericBody Id="Earth" Parent="Sol">```
+ - AtmosphericBody: This defines the planet as having an atmosphere. This is used for both gas giants and atmospheric planets
+ - Earth: The ID/Name of the planet
+ - Sol: The body the planet orbits
+
+### Orbital Specifications
+This defines how the object orbits its parent body
+
+#### SemiMajorAxis
+ - Supported Units (in Ascending Order): M, Km, Gm, Au, Ly
+ - Example: ```<SemiMajorAxis Km="	100000.327" />```
+ - The SemiMajorAxis is the longest radius of the orbit
+
+#### Inclination
+ - Supported Units: Degrees
+ - Example: ```<Inclination Degrees="1" />```
+ - The Inclination is the angle at which the object orbits relative to the plane the object rotates
+
+#### Eccentricity
+ - Supported Units: Value
+ - Example: ```<Eccentricity Value="0.5" />```
+ - Eccentricity is the amount that the object's orbit differs from a circle. A value of 0 would be a perfect circle, and a value of 1 would go juse outside the SOI.
+
+#### LongitudeOfAscendingNode
+ - Supported Units: Degrees
+ - Example: ```<LongitudeOfAscendingNode Degrees="55" />```
+ - The LongitudeOfAscendingNode is an orbital element that measures the angle from a reference direction to the point where an orbit crosses a reference plane in an upward direction (from south to north)
+
+#### ArgumentOfPeriapsis
+ - Supported Units: Degrees
+ - Example: ```<ArgumentOfPeriapsis Degrees="3" />```
+ - The ArgumentOfPeriapsis is the point in the orbital plane between the Periapsis and Ascending Node
+
+#### MeanAnomalyAtEpoch
+ - Supported Units: Degrees
+ - Example: ```<MeanAnomalyAtEpoch Degrees="86.37" />```
+ - The MeanAnomalyAtEpoch is the the position of an object in its orbit at a particular moment in time, known as the epoch
+
+### Body Specifications
+This is defining how the object is shaped. Includes it's mass, radius, and height map
+
+
+#### MeanRadius
+ - Supported Units (in Ascending Order): M, Km. Others, however not recommended, are Gm, Au, Ly
+ - Example: ```<MeanRadius Km="60" />```
+ - The MeanRadius is the average distance from the center of a planet to its surface. Can also be used as equatorial radius
+
+#### Mass
+ - Supported Units (in Ascending Order): Kg, Zg, Lunas, Earths, Jupiters, Sols
+ - Example: ```<Mass Zg="1.216633" />```
+ - The Mass of an object determines the gravity and SOI of an object. Wrong masses will result in wrong gravities and SOIs
+
+#### Height
+ - Requires a texture
+ - Supported texture formats: JPG, PNG, DDS (BC5 Format), HTX2
+ - Example:
+```xml
+        <Height Path="Textures/Pluto_Height.jpg" Category="Terrain">
+            <Maximum Km="3.8734"/>
+            <Minimum Km="-0.3869"/>
+        </Height>
+```
+ - Path: This can be any path in your textures folder
+ - Maximum: Highest point on the surface
+ - Minimum: Lowest point on the surface
+
+#### Normal
+ - Requires a texture
+ - Supported texture formats: JPG, PNG, DDS (BC5 Format)
+ - Example: ```<Normal Path="Textures/Pluto_Normal.dds" Category="Terrain"/>```
+  - Path: This can be any path in your textures folder
+
+### Cosmetic
+This is just how the planet looks, only required part is the Diffuse
+
+#### Diffuse
+ - Color of the planet
+ - Requires a texture
+ - Supported texture formats: JPG, PNG, DDS (most formats)
+ - Example: ```<Diffuse Path="Textures/Pluto_Diffuse.dds" Category="Terrain"/>```
+ - Path: This can be any path in your textures folder
+
+#### Color
+ - The color of the planet's orbit path
+ - Example: ```<Color R="0.941176" G="0.901961" B="0.54902" />```
+ - R: Red color, RGB 0-1
+ - G: Green color, RGB 0-1
+ - B: Blue color, RGB 0-1
+
+### Atmosphere
+The atmosphere block can only be used for atmospheric bodies. The atmosphere block contains 2 sections, physical and visual.
+
+#### Physical
+This is obviously required, as without it your atmosphere won't do anything.
+
+The following text is an example of a physical atmosphere:
+```xml
+        <Atmosphere>
+            <Physical>
+                <SeaLevelPressure Atm="1.0"/>
+                <SeaLevelDensity KgPerM3="0.16"/>
+                <ScaleHeight Km="75" />
+            </Physical>
+        </Atmosphere>
+```
+SeaLevelPressure: This is the pressure of the atmosphere at sea level. I'm not sure if it currently does anything. Uses units Atm (Earth Atmospheric Pressure).
+
+SeaLevelDensity: This is the density of the atmosphere at sea level. If it is higher than the density of your vessel, your vessel will float above a certain point. Uses units KgPerM3 (Kilograms per cubic Meter).
+
+ScaleHeight: This is the height at which your atmosphere will have 0 pressure and 0 density. Uses all units for 1 dimensional measurement that are implemented into the game.
+
+#### Visual
+This determines the color, light reflection, and overall look of the atmosphere. Without it, the atmosphere will not be visible.
+
+The following text is an example of a visual atmosphere:
+```xml
+        <Atmosphere>
+            <Visual>
+                <RayleighScattering>
+                    <Coefficients R="1.8e-4" G="1.8e-4" B="1.1e-4" />
+                    <ScaleHeight Km="650"/>
+                </RayleighScattering>
+                <MieScattering>
+                    <Coefficients R="4e-4" G="4e-4" B="4e-4"/>
+                    <ScaleHeight Km="100"/>
+                    <PhaseFunctionAsymmetry X="0.1" Y="0.1" Z="0.1"/>
+                </MieScattering>
+            </Visual>
+        </Atmosphere>
+```
+RayleighScattering:
+ - This is the light scattering in the upper atmosphere
+ - Coefficients: This is the color. Higher numbers will show denser and less transparent. Uses RGB 0-1.
+ - ScaleHeight: The height at which the atmosphere will no longer be visible
+
+MieScattering:
+ - This is the light scattering in the lower atmosphere
+ - Coefficients: This is the color. Higher numbers will show denser and less transparent. Uses RGB 0-1.
+ - ScaleHeight: The height at which the atmosphere will no longer be visible
+ - PhaseFunctionAsymmetry: This makes light bounce in different differections. For example, a higher X value will make light more likely to bounce in the X direction
+
+#### Full Example
+```xml
+        <Atmosphere>
+            <Visual>
+                <RayleighScattering>
+                    <Coefficients R="1.8e-4" G="1.8e-4" B="1.1e-4" />
+                    <ScaleHeight Km="650"/>
+                </RayleighScattering>
+                <MieScattering>
+                    <Coefficients R="4e-4" G="4e-4" B="4e-4"/>
+                    <ScaleHeight Km="100"/>
+                    <PhaseFunctionAsymmetry X="0.1" Y="0.1" Z="0.1"/>
+                </MieScattering>
+            </Visual>
+            <Physical>
+                <SeaLevelPressure Atm="1.0"/>
+                <SeaLevelDensity KgPerM3="0.16"/>
+                <ScaleHeight Km="75" />
+            </Physical>
+        </Atmosphere>
+```
+
+### Oceans
+TBA
+
+### Clouds
+TBA

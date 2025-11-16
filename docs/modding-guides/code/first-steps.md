@@ -110,9 +110,20 @@ namespace SASMod
 
 ```
 
+<<<<<<< HEAD
 The api exposes a couple of attributes but for this simple hello world example we only need one:
 `[StarMapImmediateLoad]`. The function marked with this attribute will be run when the mod is loaded. The function this attribute is assigned to does need to take in `Mod definingMod` as a parameter.
 
+=======
+IStarMapMod requires you to implement 3 functions and one member (There is currently a typo in StarMap: OnImmediateLoad should for now be written as OnImmediatLoad until the fix is accepted)
+
+- `public void OnImmediateLoad()`
+- `public void OnFullyLoaded()`
+- `public void Unload()`
+- `public bool ImmediateUnload`
+
+So lets do that next
+>>>>>>> be0a6f8cfbc059ae0e6df8c867d0a1208dfe185a
 
 ```c#
 using StarMap.API;
@@ -123,8 +134,23 @@ namespace SASMod
     [StarMapMod]
     public class SASMod
     {
+<<<<<<< HEAD
         [StarMapImmediateLoad]
         public void Init(Mod definingMod)
+=======
+        public bool ImmediateUnload => false;
+        public void OnImmediateLoad()
+        {
+
+        }
+
+        public void OnFullyLoaded()
+        {
+
+        }
+
+        public void Unload()
+>>>>>>> be0a6f8cfbc059ae0e6df8c867d0a1208dfe185a
         {
 
         }
