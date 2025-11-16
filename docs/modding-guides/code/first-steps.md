@@ -87,7 +87,7 @@ We will have to add a custom Package Source to nuget to be able to use StarMap
 
 ## Step 2: Creating a IStarMapMod class
 
-StarMap automatically loads the first class that implements IStarMapMod and has the same name as its dll. For more info about the dll see [The compilation section]() <!-- TODO: add section -->
+StarMap automatically loads the class with the same name as the .dll file and that has the `[StarMapMod]` attribute
 
 Our first step will be creating this class. Our example will be using the name `FirstMod` for the mod.
 
@@ -97,10 +97,12 @@ Create a class under the namespace FirstMod with the name FirstMod. And let it i
 
 ```c#
 using StarMap.API;
+using KSA;
 
-namespace FirstMod
+namespace SASMod
 {
-    public class FirstMod : IStarMapMod
+    [StarMapMod]
+    public class SASMod
     {
 
     }
@@ -108,32 +110,21 @@ namespace FirstMod
 
 ```
 
-IStarMapMod requires you to implement 3 functions
+The api exposes a couple of attributes but for this simple hello world example we only need one:
+`[StarMapImmediateLoad]`. The function marked with this attribute will be run when the mod is loaded. The function this attribute is assigned to does need to take in `Mod definingMod` as a parameter.
 
-- `public void OnImmediatLoad()`
-- `public void OnFullyLoaded()`
-- `public void Unload()`
-
-So lets do that next
 
 ```c#
 using StarMap.API;
+using KSA;
 
-namespace FirstMod
+namespace SASMod
 {
-    public class FirstMod : IStarMapMod
+    [StarMapMod]
+    public class SASMod
     {
-        public void OnImmediatLoad()
-        {
-
-        }
-
-        public void OnFullyLoaded()
-        {
-
-        }
-
-        public void Unload()
+        [StarMapImmediateLoad]
+        public void Init(Mod definingMod)
         {
 
         }
@@ -148,8 +139,9 @@ Just add a `Console.WriteLine("Hello World!")`
 
 Inside FirstMod:
 ```c#
-public void OnFullyLoaded()
-{
+[StarMapImmediateLoad]
+public void Init(Mod definingMod)
+{   
     Console.WriteLine("Hello World!");
 }
 ```
