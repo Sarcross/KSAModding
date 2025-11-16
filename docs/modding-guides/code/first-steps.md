@@ -108,11 +108,12 @@ namespace FirstMod
 
 ```
 
-IStarMapMod requires you to implement 3 functions
+IStarMapMod requires you to implement 3 functions and one member (There is currently a typo in StarMap: OnImmediateLoad should for now be written as OnImmediatLoad until the fix is accepted)
 
 - `public void OnImmediateLoad()`
 - `public void OnFullyLoaded()`
 - `public void Unload()`
+- `public bool ImmediateUnload`
 
 So lets do that next
 
@@ -123,6 +124,7 @@ namespace FirstMod
 {
     public class FirstMod : IStarMapMod
     {
+        public bool ImmediateUnload => false;
         public void OnImmediateLoad()
         {
 
