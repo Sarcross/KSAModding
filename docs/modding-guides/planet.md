@@ -5,9 +5,11 @@ This guide explains how to add custom planets to the game.
 
 ## Requirements
 Requirements:
+
 - GIMP or any other image editing tool that can export .dds files in BC5 format
 
 ## File Locations
+
 - **Game Directory**: `C:\Users\[YourName]\AppData\Local\Programs\Kitten Space Agency\`
 - **Textures**: `Content/Core/Textures`
 - **Planet Definitions**: `Content/Core/Astronomicals.xml`
