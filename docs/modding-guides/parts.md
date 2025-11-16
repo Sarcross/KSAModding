@@ -85,16 +85,19 @@ KSA only renders the **first primitive per mesh**. If your model has multiple pa
 KSA uses PBR (Physically Based Rendering) materials with 3 texture types:
 
 1. **Diffuse** (Base Color/Albedo) - Required
+  
    - The main color/texture map
    - Format: PNG or DDS
    - RGB channels
 
 2. **Normal** (Tangent Space) - Required
+ 
    - Height/bump information
    - Format: PNG or DDS
    - RGB: (128, 128, 255) = flat normal (no bumps)
 
 3. **RoughMetalAo** - Required
+ 
    - Combined texture with 3 properties:
    - Red channel: Roughness (0=smooth, 255=rough)
    - Green channel: Metallic (0=non-metal, 255=metal)
@@ -106,10 +109,12 @@ KSA uses PBR (Physically Based Rendering) materials with 3 texture types:
 If you don't have normal or RoughMetalAo textures, you need to create placeholder ones.
 
 **Flat Normal Map:**
+
 - Create a 512x512 PNG image filled with RGB color (128, 128, 255) - this is a flat blue color that represents no bumps
 - Save as `your_model_normal.png`
 
 **Neutral RoughMetalAo Map:**
+
 - Create a 512x512 PNG image filled with RGB color (128, 0, 255)
 - Red channel (128) = medium roughness
 - Green channel (0) = not metallic
@@ -243,17 +248,20 @@ Add thrusters to any `<SubPart>` section for attitude control:
 ```
 
 **Thruster Coordinate System:**
+
 - X = Forward/Back (+X forward, -X back)
 - Y = Left/Right (+Y right, -Y left)
 - Z = Up/Down (+Z up, -Z down)
 
 **ExhaustDirection:** Points opposite to thrust direction
+
 - To thrust forward: ExhaustDirection X="-1.0"
 - To thrust back: ExhaustDirection X="1.0"
 - To thrust up: ExhaustDirection Z="-1.0"
 - To thrust down: ExhaustDirection Z="1.0"
 
 **Control Maps Available:**
+
 - Rotation: `YawLeft`, `YawRight`, `PitchUp`, `PitchDown`, `RollLeft`, `RollRight`
 - Translation: `TranslateForward`, `TranslateBack`, `TranslateLeft`, `TranslateRight`, `TranslateUp`, `TranslateDown`
 
@@ -333,26 +341,30 @@ Edit `SolSystem.xml`, add near other Earth vehicles:
 ## Troubleshooting
 
 ### Game Crashes on Load
+
 - **Missing Normal/RoughMetalAo textures**: All three texture types are REQUIRED
 - **Invalid GLB file**: Check that your GLB has proper vertex attributes (POSITION, NORMAL, TEXCOORD_0)
 - **XML syntax error**: Validate your XML changes
 
 ### Model Not Visible
+
 - **Scene node issue**: GLB scene must reference the correct node
 - **Scale too small/large**: Check your model scale in Blender before export
 - **Wrong mesh path**: Verify `Path="Meshes/your_model.glb"` matches actual filename
 
 ### Only Part of Model Shows
+
 - **Multi-primitive mesh**: KSA only renders first primitive - split your model into separate files
 - **Child parts not attached**: Check RootPart hierarchy in Astronomicals.xml
 
 ### Black/Missing Textures
+
 - **Inverted normals**: In Blender, select all faces > Shift+N (recalculate normals)
 - **Wrong texture path**: Verify texture filenames match exactly in PbrMaterial definitions
 - **Missing textures**: Check all three texture files are in Textures folder
 
 ### RCS Not Working
-- **RCS not enabled**: Press N key in-game to toggle RCS
+
 - **Wrong exhaust directions**: Check ExhaustDirection vectors are correct
 - **Insufficient thrust**: Increase `Thrust N="150"` value
 - **No propellant**: Check `<PropellantMass Kg="500" />` is set
