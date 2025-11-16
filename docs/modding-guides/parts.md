@@ -22,22 +22,40 @@ This guide explains how to add custom 3D models as vehicles/parts in Kitten Spac
 
 KSA uses GLB (GLTF 2.0 binary) format for meshes.
 
+**Model Orientation (Critical):**
+
+Before exporting, orient your model according to KSA's coordinate system:
+
+- **+X = Forward** (nose, front of vehicle)
+- **-X = Back** (engine nozzles, rear)
+- **+Y = Right**
+- **-Y = Left**
+- **+Z = Up** (top of vehicle, doors on capsules)
+- **-Z = Down** (radial parts attach here, bottom of vehicle)
+
+Examples:
+- Capsule: doors face up (+Z), nose forward (+X), base back (-X)
+- Engine: nozzle points back (-X), attachment point forward (+X)
+- Radial parts: attachment face down (-Z), outer face up (+Z)
+
 **In Blender:**
 
 1. Import your model (File > Import)
-2. Select all objects (A key)
-3. Apply all modifiers if needed
-4. **Important**: Check vertex attributes - model MUST have:
+2. Rotate model to match KSA orientation (see above)
+3. Apply all transforms (Ctrl+A > All Transforms)
+4. Select all objects (A key)
+5. Apply all modifiers if needed
+6. **Important**: Check vertex attributes - model MUST have:
     - POSITION
     - NORMAL
     - TEXCOORD_0 (UV coordinates)
-5. File > Export > glTF 2.0 (.glb)
-6. Export settings:
+7. File > Export > glTF 2.0 (.glb)
+8. Export settings:
     - Format: **GLB (binary)**
     - Include: Selected Objects only (or everything if you want)
     - Transform: +Y Up
     - **DO NOT** embed textures
-7. Save as `your_model.glb`
+9. Save as `your_model.glb`
 
 ### 1.2 Optimize File Size (Optional but Recommended)
 
@@ -224,9 +242,15 @@ Add thrusters to any `<SubPart>` section for attitude control:
 ```
 
 **Thruster Coordinate System:**
-- X = Forward/Back (forward is +X)
-- Y = Left/Right (right is +Y)
-- Z = Up/Down (up is +Z)
+- X = Forward/Back (+X forward, -X back)
+- Y = Left/Right (+Y right, -Y left)
+- Z = Up/Down (+Z up, -Z down)
+
+**ExhaustDirection:** Points opposite to thrust direction
+- To thrust forward: ExhaustDirection X="-1.0"
+- To thrust back: ExhaustDirection X="1.0"
+- To thrust up: ExhaustDirection Z="-1.0"
+- To thrust down: ExhaustDirection Z="1.0"
 
 **Control Maps Available:**
 - Rotation: `YawLeft`, `YawRight`, `PitchUp`, `PitchDown`, `RollLeft`, `RollRight`
