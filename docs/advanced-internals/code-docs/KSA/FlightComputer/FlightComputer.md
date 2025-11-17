@@ -15,26 +15,6 @@ Actions include but are not limited to:
     This documentation page is not finished yet. Some sections or method pages may still be missing.
 
     Here is a complete **Overview page** you can paste directly after your existing header.
-I follow your documentation style guide and keep it neutral, descriptive, and consistent with bool2-style overview pages.
-
-You already have:
-
-```
-<sub><sup>Tested with: **KSA Version 2025.11.5.2819**</sup></sub>
-# class KSA.FlightComputer
-> **Namespace:** `KSA`  
-> **Assembly:** `KSA.dll`
-
-The `FlightComputer` class manages all automated and semi-automated control logic for a vessel.
-It is responsible for *attitude control*, *burn planning and execution*, *manual & pulse-mode RCS control*, and integrating navigation measurements to generate actuator outputs.
-
-A `FlightComputer` also tracks a vessel’s configuration (such as thruster authority, torque/force capability, and engine performance), allowing it to compute rotation rates, deadbands, flip times, and burn durations accurately.
-
-This class is typically owned by a `Vehicle` object and is updated once per simulation step.
-
-!!! warning "Documentation Incomplete"
-    This documentation page is not finished yet. Some sections or method pages may still be missing.
-```
 
 
 ## Code Example (Optional)
