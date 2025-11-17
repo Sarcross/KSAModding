@@ -161,3 +161,7 @@ Alias for `(G, R)` same as `(Y, X)`.
 #### `bool2 operator |(bool2 a, bool2 b)` — Componentwise OR
 #### `bool2 operator &(bool2 a, bool2 b)` — Componentwise AND
 
+## Method Pages (Overview)
+
+* [`CopyTo(...)`](/KSAModding/advanced-internals/code-docs/Brutal/Numerics/bool2/CopyTo/)
+

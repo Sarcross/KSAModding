@@ -103,5 +103,8 @@ After the description, add a section that lists all function protoypes for a fun
 ### Members (classes and structs)
 When writing documentation for classes or structs, if it has public members add a section for those as well. For a detailed example go to the [bool2 example](/KSAModding/advanced-internals/code-docs/Brutal/Numerics/bool2/bool2/).
 
+### Methods (classes and structs)
+For classes and structs the methods are located in separate pages so after the members include a section that contains a list of methods and links to them. For a detailed example go to [bool2 example](/KSAModding/advanced-internals/code-docs/Brutal/Numerics/bool2/bool2/)
+
 ### Operators
 When writing documentation for classes or structs, if it has public operators add a section for those as well. For a detailed example go to the [bool2 example](/KSAModding/advanced-internals/code-docs/Brutal/Numerics/bool2/bool2/).
