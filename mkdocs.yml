@@ -56,19 +56,21 @@ nav:
         - KSA:
           - FlightComputer:
             - Overview: advanced-internals/code-docs/KSA/FlightComputer/FlightComputer.md
+        - KSA.dll:
+          - What is this?: ksa.dll/ksa_dll.md
+          - KSA Section:
+            - Variable:
+              - Significant Variables: ksa.dll/classes/significant_classes.md
+              - Class Types: ksa.dll/classes/class_types.md
+              - Implementing Classes: ksa.dll/classes/implementing_classes.md
+              - Units: ksa.dll/variables/units.md
+              - Vessels: ksa.dll/variables/vessel.md
   - Troubleshooting:
       - Logs and Debugging: troubleshooting/logs-and-debugging.md
   - Meta:
       - Documentation Style Guide: meta/style-guide.md
       - Versioning Policy: meta/versioning-policy.md
       - Adding To Code Docs: meta/code-doc-guide.md
-  - Advanced Modding:
-      - KSA.dll:
-        - What is this?: ksa.dll/ksa_dll.md
-        - KSA Section:
-          - Variable:
-            - Significant Variables: ksa.dll/classes/significant_classes.md
-            - Class Types: ksa.dll/classes/class_types.md
 
 plugins:
   - search
