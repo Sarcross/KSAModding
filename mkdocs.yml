@@ -42,6 +42,9 @@ nav:
       - Star Binaries: modding-guides/star-binaries.md
       - Code:
         - First Steps: modding-guides/code/first-steps.md
+        - Harmony: modding-guides/code/harmony.md
+        - Input:
+          - Keyboard Input: modding-guides/code/input/keyboard-input.md
   - Pipelines & Tools:
       - Modeling Pipeline: pipelines-tools/modeling-pipeline.md
       - Texture Pipeline: pipelines-tools/texture-pipeline.md
